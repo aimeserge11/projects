@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mark Comparison</title>
+</head>
+<body>
+  <h2>Mark Comparison Results</h2>
+  <div id="results"></div>
+
+  <script>
+    // Prompt for inputs and convert them to numbers
+    const mark1 = Number(prompt("Enter the first mark:"));
+    const mark2 = Number(prompt("Enter the second mark:"));
+
+    // Compare values (handling equality and greater than)
+    let comparisonResult = "";
+    if (mark1 === mark2) {
+      comparisonResult = "Both marks are equal.";
+    } else if (mark1 > mark2) {
+      comparisonResult = "Mark 1 is greater than Mark 2.";
+    } else {
+      comparisonResult = "Mark 2 is greater than Mark 1.";
+    }
+
+    // Check parity using bitwise AND (& 1)
+    // If (n & 1) equals 0, the number is even
+    const isMark1Even = (mark1 & 1) === 0 ? "Even" : "Odd";
+    const isMark2Even = (mark2 & 1) === 0 ? "Even" : "Odd";
+
+    // Display output on the page
+    document.getElementById("results").innerHTML = `
+      <p><strong>Mark 1:</strong> ${mark1} (${isMark1Even})</p>
+      <p><strong>Mark 2:</strong> ${mark2} (${isMark2Even})</p>
+      <p><strong>Comparison:</strong> ${comparisonResult}</p>
+    `;
+  </script>
+</body>
+</html>

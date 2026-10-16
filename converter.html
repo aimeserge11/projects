@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Temperature Converter</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, "Times New Roman", serif;
+      background: #6e603a;
+      color: #1b2a33;
+      padding: 16px;
+    }
+
+    .converter {
+      width: 100%;
+      max-width: 380px;
+      background: #4e888c;
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 1.6rem;
+    }
+
+    p {
+      margin: 0 0 20px;
+      color: #4a5a63;
+      font-size: 0.95rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      border: 2px solid #b9c4c9;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #07378052;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      font-size: 1rem;
+      font-family: inherit;
+      font-weight: bold;
+      color: #fff;
+      background: #c5f03a88;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #c94823; }
+    button:focus-visible { outline: 3px solid #1f3a4d; outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <div class="converter">
+    <h1>Temperature Converter</h1>
+    <p>Enter a temperature and pick its unit. The results appear in an alert.</p>
+
+    <label for="temp">Temperature</label>
+    <input type="number" id="temp" placeholder="e.g. 25" step="any">
+
+    <label for="unit">Convert from</label>
+    <select id="unit">
+      <option value="C">Celsius (°C)</option>
+      <option value="F">Fahrenheit (°F)</option>
+      <option value="K">Kelvin (K)</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+  </div>
+
+  <script>
+    function convert() {
+      var input = document.getElementById("temp").value;
+      var unit = document.getElementById("unit").value;
+
+      if (input === "") {
+        window.alert("Please enter a temperature first.");
+        return;
+      }
+
+      var value = parseFloat(input);
+      var c, f, k;
+
+      // Convert the input to Celsius first
+      if (unit === "C") {
+        c = value;
+      } else if (unit === "F") {
+        c = (value - 32) * 5 / 9;
+      } else {
+        c = value - 273.15;
+      }
+
+      // Then from Celsius to the other units
+      f = c * 9 / 5 + 32;
+      k = c + 273.15;
+
+      if (k < 0) {
+        window.alert("That is below absolute zero (0 K). Enter a higher temperature.");
+        return;
+      }
+
+      window.alert(
+        "Results:\n\n" +
+        "Celsius: " + c.toFixed(2) + " °C\n" +
+        "Fahrenheit: " + f.toFixed(2) + " °F\n" +
+        "Kelvin: " + k.toFixed(2) + " K"
+      );
+    }
+  </script>
+</body>
+</html>
